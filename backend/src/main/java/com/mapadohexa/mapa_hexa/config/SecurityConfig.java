@@ -21,8 +21,12 @@ public class SecurityConfig {
                 // O SEGREDO: Libera o "Preflight" do navegador para qualquer rota
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                 
-                // Libera a sua rota de teste
-                .requestMatchers("/api/status").permitAll() 
+                // Libera endpoints públicos de autenticação
+                .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+
+                // Libera a rota de teste
+                .requestMatchers("/api/status").permitAll()
                 
                 // Bloqueia o resto exigindo login
                 .anyRequest().authenticated() 
