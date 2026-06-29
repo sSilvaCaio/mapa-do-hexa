@@ -1,7 +1,12 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
+const rawApiUrl = import.meta.env.VITE_API_URL ?? 'https://mapa-do-hexa.onrender.com'
+const apiBaseUrl = rawApiUrl.endsWith('/api')
+  ? rawApiUrl
+  : rawApiUrl.replace(/\/+$/g, '') + '/api'
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'https://mapa-do-hexa.onrender.com/api',
+  baseURL: apiBaseUrl,
 })
 
 api.interceptors.request.use(
