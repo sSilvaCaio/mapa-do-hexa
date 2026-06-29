@@ -31,6 +31,10 @@ public class InscricaoService {
             throw new IllegalArgumentException("Evento cancelado");
         }
 
+        if (!eventoService.confirmacoesAbertas(evento)) {
+            throw new IllegalArgumentException("Inscrições encerradas para este evento");
+        }
+
         if (evento.getMaxParticipantes() != null &&
                 evento.getTotalInscritos() >= evento.getMaxParticipantes()) {
             throw new IllegalArgumentException("Evento lotado");

@@ -35,6 +35,8 @@ export interface Evento {
   maxParticipantes?: number
   totalInscritos: number
   usuarioInscrito: boolean
+  confirmacoesAbertas: boolean
+  status: string
   criadoEm: number
   compartilhadoComigo: boolean
   compartilhadoPor?: string

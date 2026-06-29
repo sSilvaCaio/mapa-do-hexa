@@ -17,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -167,6 +171,21 @@ public class EventoService {
                 .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado"));
     }
 
+    public boolean confirmacoesAbertas(Evento evento) {
+        try {
+            LocalDate date = LocalDate.parse(evento.getData(), DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalTime time = LocalTime.parse(evento.getHorario(), DateTimeFormatter.ISO_LOCAL_TIME);
+            LocalDateTime eventoDateTime = LocalDateTime.of(date, time);
+            return eventoDateTime.isAfter(LocalDateTime.now());
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    private String eventoStatus(Evento evento) {
+        return confirmacoesAbertas(evento) ? "Aberto" : "Evento em andamento ou finalizado";
+    }
+
     public void compartilhar(String eventoId, String destinatarioId, String remetenteId) {
         Evento evento = getEvento(eventoId);
         if (!evento.isAtivo()) {
@@ -225,6 +244,7 @@ public class EventoService {
                 e.getNomeLocal(), e.getEndereco(), e.getLat(), e.getLng(),
                 e.getDescricao(), e.getOQueLevar(), e.getInfraestrutura(),
                 e.getMaxParticipantes(), e.getTotalInscritos(), inscrito,
+                confirmacoesAbertas(e), eventoStatus(e),
                 e.getCriadoEm(),
                 compartilhadoPor != null,
                 compartilhadoPor

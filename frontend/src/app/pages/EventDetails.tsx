@@ -143,6 +143,11 @@ export function EventDetails() {
             <MapPin size={16} className="text-verde" />
             <span>{evento.nomeLocal}</span>
           </div>
+          <div className="flex items-center gap-2 text-sm text-gray-600 md:col-span-2">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+              {evento.status}
+            </span>
+          </div>
           {evento.endereco && (
             <div className="flex items-center gap-2 text-sm text-gray-500 md:col-span-2">
               <MapPin size={16} className="text-gray-400" />
@@ -189,25 +194,40 @@ export function EventDetails() {
 
         {/* Botão de presença */}
         {user?.id !== evento.organizadorId && (
-          <button
-            onClick={handleInscricao}
-            disabled={loadingInscricao || cheio}
-            className={`w-full py-3 font-bold rounded-lg transition-colors disabled:opacity-50 ${
-              evento.usuarioInscrito
-                ? 'bg-red-500 hover:bg-red-600 text-white'
+          <>
+            {!evento.confirmacoesAbertas && !evento.usuarioInscrito && (
+              <div className="rounded-lg bg-orange-50 border border-orange-200 text-orange-700 px-4 py-3 text-sm mb-4">
+                As confirmações foram encerradas. Não é mais possível confirmar presença.
+              </div>
+            )}
+            <button
+              onClick={handleInscricao}
+              disabled={
+                loadingInscricao ||
+                cheio ||
+                (!evento.usuarioInscrito && !evento.confirmacoesAbertas)
+              }
+              className={`w-full py-3 font-bold rounded-lg transition-colors disabled:opacity-50 ${
+                evento.usuarioInscrito
+                  ? 'bg-red-500 hover:bg-red-600 text-white'
+                  : !evento.confirmacoesAbertas
+                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                  : cheio
+                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                  : 'bg-verde hover:bg-green-700 text-white'
+              }`}
+            >
+              {loadingInscricao
+                ? 'Aguarde...'
+                : evento.usuarioInscrito
+                ? 'Cancelar Presença'
+                : !evento.confirmacoesAbertas
+                ? 'Confirmações Encerradas'
                 : cheio
-                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                : 'bg-verde hover:bg-green-700 text-white'
-            }`}
-          >
-            {loadingInscricao
-              ? 'Aguarde...'
-              : evento.usuarioInscrito
-              ? 'Cancelar Presença'
-              : cheio
-              ? 'Evento Lotado'
-              : 'Confirmar Presença ✓'}
-          </button>
+                ? 'Evento Lotado'
+                : 'Confirmar Presença ✓'}
+            </button>
+          </>
         )}
         {user?.id === evento.organizadorId && (
           <div className="space-y-2">

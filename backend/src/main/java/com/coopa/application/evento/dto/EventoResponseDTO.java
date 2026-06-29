@@ -18,6 +18,8 @@ public record EventoResponseDTO(
     Integer maxParticipantes,
     Integer totalInscritos,
     boolean usuarioInscrito,
+    boolean confirmacoesAbertas,
+    String status,
     Long criadoEm,
     boolean compartilhadoComigo,
     String compartilhadoPor

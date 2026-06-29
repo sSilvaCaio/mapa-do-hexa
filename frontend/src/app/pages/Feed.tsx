@@ -234,16 +234,23 @@ function EventoCard({
       <div className="p-5">
         <div className="flex items-start justify-between gap-2 mb-3">
           <h2 className="font-bold text-azul text-lg leading-tight">{evento.titulo}</h2>
-          {cheio && (
-            <span className="shrink-0 text-xs bg-red-100 text-red-600 font-semibold px-2 py-0.5 rounded-full">
-              Cheio
-            </span>
-          )}
-          {evento.usuarioInscrito && !cheio && (
-            <span className="shrink-0 text-xs bg-green-100 text-verde font-semibold px-2 py-0.5 rounded-full">
-              Confirmado ✓
-            </span>
-          )}
+          <div className="flex flex-wrap gap-2 items-center">
+            {!evento.confirmacoesAbertas && (
+              <span className="shrink-0 text-xs bg-orange-100 text-orange-700 font-semibold px-2 py-0.5 rounded-full">
+                {evento.status}
+              </span>
+            )}
+            {cheio && (
+              <span className="shrink-0 text-xs bg-red-100 text-red-600 font-semibold px-2 py-0.5 rounded-full">
+                Cheio
+              </span>
+            )}
+            {evento.usuarioInscrito && !cheio && (
+              <span className="shrink-0 text-xs bg-green-100 text-verde font-semibold px-2 py-0.5 rounded-full">
+                Confirmado ✓
+              </span>
+            )}
+          </div>
         </div>
 
         <p className="text-sm font-medium text-gray-600 mb-3">⚽ {evento.jogo}</p>
