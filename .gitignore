@@ -1,0 +1,21 @@
+# Backend
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/application-local.properties
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Env secrets
+.env
+**/.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+desktop.ini
