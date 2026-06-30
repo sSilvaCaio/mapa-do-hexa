@@ -8,7 +8,7 @@ A aplicação foi desenvolvida como trabalho final da disciplina de Programaçã
 
 ## Acesso
 
-**Deploy em produção:** [https://mapa-do-hexa.onrender.com](https://mapa-do-hexa-five.vercel.app/)
+**Deploy em produção:** [https://mapa-do-hexa-five.vercel.app/](https://mapa-do-hexa-five.vercel.app/)
 
 Toda a aplicação exige autenticação. Ao acessar a URL, o usuário é redirecionado para a tela de login, onde pode entrar com uma conta existente ou criar uma nova. Não há nenhuma rota pública além da própria tela de login/cadastro.
 
@@ -110,7 +110,7 @@ Configure a URL do backend no arquivo `frontend/.env` (veja `.env.example`).
 | Base de dados no back-end | MongoDB com sete coleções: `users`, `eventos`, `inscricoes`, `eventos_compartilhados`, `amizades`, `mensagens_mural` e `notificacoes`. |
 | Compartilhamento de dados entre usuários | Eventos podem ser compartilhados com amigos via `POST /api/eventos/{id}/compartilhar`. O mural de cada evento é colaborativo. O sistema de amizades conecta usuários entre si. |
 | Front-end responsivo | Tailwind CSS com breakpoints `sm`, `md`, `lg`, `xl`. No mobile, o menu de navegação fica fixo na parte inferior da tela. No desktop, aparece como barra superior. Os grids de eventos se adaptam de 1 para até 3 colunas conforme a largura da tela. |
-| Disponível 24/7 em servidor | Aplicação containerizada com Docker e hospedada no Render e Vercel: [https://mapa-do-hexa.onrender.com](https://mapa-do-hexa-five.vercel.app/) |
+| Disponível 24/7 em servidor | Aplicação containerizada com Docker e hospedada no Render e Vercel: [https://mapa-do-hexa-five.vercel.app/](https://mapa-do-hexa-five.vercel.app/) |
 
 ---
 
